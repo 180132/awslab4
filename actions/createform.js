@@ -19,7 +19,7 @@ var task = function(request, callback){
 	var s3Form = new S3Form(policy);
 	//4. get bucket name
 	var formFields = s3Form.generateS3FormFields();
-	formFields = s3Form.addCredentialsFields(formFields, awsConfig);
+	formFields = s3Form.addS3CredientalsFields(formFields, awsConfig);
 	
 	var bucketName = policy.getConditionValueByKey("bucket");
 	
