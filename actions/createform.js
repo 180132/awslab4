@@ -23,7 +23,7 @@ var task = function(request, callback){
 	
 	var bucketName = policy.getConditionValueByKey("bucket");
 	
-	callback(null, {template: INDEX_TEMPLATE, params:{fields:[], bucket:bucketName}});
+	callback(null, {template: INDEX_TEMPLATE, params:{fields:formFields, bucket:bucketName}});
 }
 
 exports.action = task;
