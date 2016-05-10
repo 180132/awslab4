@@ -1,5 +1,5 @@
 {	"expiration" : {"day":1},
-	"conditions": [ ["starts-with", "$key", "radek.student/"],
+	"conditions": [ ["starts-with", "$key", "bednarek.student/"],
     				 {"bucket": "lab4-weeia"}, 
     				 {"acl": "private"},
     				 {"success_action_redirect": "http://localhost:8080/s3digest/"},   
