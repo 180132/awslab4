@@ -13,6 +13,7 @@
     "aws-sdk": "^2.3.9",
     "ejs": "^1.0.0",
     "moment": "^2.5.1",
-    "webs-weeia": "0.0.2"
+    "webs-weeia": "0.0.2",
+    "simpledb" : "0.2.0"
   }
 }

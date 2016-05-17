@@ -20,10 +20,24 @@ var task = function(request, callback){
 	//4. get bucket name
 	var formFields = s3Form.generateS3FormFields();
 	formFields = s3Form.addS3CredientalsFields(formFields, awsConfig);
-	
+
 	var bucketName = policy.getConditionValueByKey("bucket");
-	
+
+	var sdb = new simpledb.SimpleDB({keyid: awsConfig.accessKeyId,secret:awsConfig.secretAccessKey})
+
+	sdb.createDomain( domaind, function( error ) {
+
+	  sdb.putItem(domaind, ip, {attr1: request.ip }, function( error ) {
+
+		sdb.getItem(domaind, ip, function( error, result ) {
+		  console.log( 'attr1 = '+result.attr1 )
+		})
+	  })
+	})
+
 	callback(null, {template: INDEX_TEMPLATE, params:{fields:formFields, bucket:bucketName}});
+
+
 }
 
 exports.action = task;
