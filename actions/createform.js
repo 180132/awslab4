@@ -5,6 +5,7 @@ var S3Form = require("../s3post").S3Form;
 var AWS_CONFIG_FILE = "config.json";
 var POLICY_FILE = "policy.json";
 var INDEX_TEMPLATE = "index.ejs";
+var simpledb = require('simpledb');
 
 
 var task = function(request, callback){
@@ -24,13 +25,14 @@ var task = function(request, callback){
 	var bucketName = policy.getConditionValueByKey("bucket");
 
 	var sdb = new simpledb.SimpleDB({keyid: awsConfig.accessKeyId,secret:awsConfig.secretAccessKey})
+	var myDomain="BednarekSimpleDB";
+	var ip = request.ip;
+	sdb.createDomain( myDomain, function( error ) {
 
-	sdb.createDomain( domaind, function( error ) {
+	  sdb.putItem(myDomain, ip, {attr1: request.ip }, function( error ) {
 
-	  sdb.putItem(domaind, ip, {attr1: request.ip }, function( error ) {
-
-		sdb.getItem(domaind, ip, function( error, result ) {
-		  console.log( 'attr1 = '+result.attr1 )
+		sdb.getItem(myDomain, ip, function( error, result ) {
+		  console.log( 'result attribute = '+result.attr1 )
 		})
 	  })
 	})
